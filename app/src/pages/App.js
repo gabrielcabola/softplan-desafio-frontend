@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route, Redirect , withRouter } from 'react-router-dom' // importando o BrowserRouter para criar as rotas e views internas
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 

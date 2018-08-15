@@ -15,16 +15,18 @@ $baseblack: #000000;
 $grey-dark: lighten($baseblack, (100% - 87%));
 $grey-medium: lighten($baseblack, (100% - 54%));
 $grey-light: lighten($baseblack, (100% - 38%));
-//
-// //shades
-// .grey-dark {
-//   color: $grey-dark;
-// }
-//
-// .grey-medium {
-//   color: $grey-medium;
-// }
-//
-// .grey-light {
-//   color: $grey-light;
-// }
+
+$shadow: 0px 3px 4px rgba(201,201,201,0.9);
+$shadow-primary: 0px 0px 28px rgba(41,105,148,0.2);
+
+@mixin shadow($shadow) {
+  -moz-box-shadow:    $shadow;
+  -webkit-box-shadow: $shadow;
+  box-shadow:        $shadow;
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}

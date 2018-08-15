@@ -1,5 +1,6 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600');
+
 
 // Variables
 @import "variables";
@@ -18,3 +19,47 @@
 
 // App
 @import "app";
+
+
+
+.List {
+    list-style: none;
+}
+
+.Label {
+  &-title { font-weight: bold; }
+  &-value {
+    display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 17px;
+
+   text-overflow: ellipsis;
+
+  }
+}
+
+.List-item {
+  cursor: pointer;
+  display: table;
+  width: 100%;
+  padding: 9px;
+  color: $grey-medium;
+  font-size: 12px;
+  margin-bottom: 13px;
+  border: 1px solid rgb(201,201,201);
+  font-weight: lighter;
+  @include shadow($shadow);
+  &--selected {
+    border: 2px solid $primary;
+    padding: 10px;
+    color: $primary;
+  }
+  &:hover {
+      // @include shadow($shadow-primary);
+    @include opacity(0.85);
+  }
+}
+
+.Thumb { background-color: $grey-light; height: 60px; max-width:60px;}
