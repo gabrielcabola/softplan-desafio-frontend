@@ -1,0 +1,17 @@
+input {
+  font-family: $font-body, sans-serif;
+  color: $grey-medium;
+  font-size: 13px;
+  font-weight: lighter;
+}
+.Input-search {
+  border-radius: 0;
+  border: 1px solid rgb(201,201,201);
+  box-shadow: 0px 3px  4px rgba(201,201,201,0.9);
+  height: 38px;
+  padding: 10px;
+  &--block {
+    display: block;
+    width:100%;
+  }
+}

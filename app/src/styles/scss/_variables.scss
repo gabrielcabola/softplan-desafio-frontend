@@ -1,0 +1,30 @@
+// Body
+$body-bg: #f5f8fa;
+
+$font-head: 'Montserrat';
+$font-title: 'Montserrat';
+$font-title: 'Montserrat';
+$font-body: 'Montserrat';
+$font-input: 'Montserrat';
+
+//Colors
+$primary: #005b95;
+$baseblack: #000000;
+
+//Shades
+$grey-dark: lighten($baseblack, (100% - 87%));
+$grey-medium: lighten($baseblack, (100% - 54%));
+$grey-light: lighten($baseblack, (100% - 38%));
+//
+// //shades
+// .grey-dark {
+//   color: $grey-dark;
+// }
+//
+// .grey-medium {
+//   color: $grey-medium;
+// }
+//
+// .grey-light {
+//   color: $grey-light;
+// }
