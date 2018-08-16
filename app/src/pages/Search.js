@@ -27,7 +27,7 @@ class Search extends Component {
     this.handleKeywordChange = this.handleKeywordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchList = this.fetchList.bind(this);
-    this.closeDetail = this.closeDetail.bind(this);
+  //  this.handlecloseDetail = this.handlecloseDetail.bind(this);
   }
 
 
@@ -58,7 +58,7 @@ class Search extends Component {
   /**
    * Grava o status do novo valor no props
    */
-  closeDetail = ()  => {
+  handlecloseDetail = ()  => {
     //this.setState({listInDetailMode: false});
     console.log('click colse');
       this.cleanSelection();
@@ -84,7 +84,6 @@ class Search extends Component {
   clickSelectProcess = (processo,index) => {
 
     this.cleanSelection();
-
 
     let newProcessos = Object.assign({}, this.state);
     newProcessos.processos[index].selected = true;
@@ -176,15 +175,17 @@ class Search extends Component {
     let content;
     let detalhe;
 
-    if(selected) {
-    //  detalhe = <Detail {...this.state}></Detail>
-        detalhe = <Processo processo={selected}  error={errorDetail} IsLoading={isLoadingDetail}></Processo>;
-    }
+
     //Loading Render
     if(isLoading) { content = <Loading></Loading>; } else {
 
       //Error Render
       if(error) { content = <p>{error.message}</p>; } else {
+
+        if(selected) {
+        //  detalhe = <Detail {...this.state}></Detail>
+            detalhe = <Processo processo={selected} clickClose={this.handlecloseDetail.bind(this)} error={errorDetail} isLoading={isLoadingDetail}></Processo>;
+        }
 
           //Sem Registros Render
           if(processos.length === 0)  { content = <h3 className="Sub-title text-primary p-50"><center>Nenhum registro encontrado</center></h3>; } else {

@@ -7,11 +7,16 @@ import { ApiProcesso }  from '../config/constants'; //
 
  function Processo({processo,clickClose,clickEdit,clickRemove,isLoading="true",error}) {
 
+
     let  content;
     let  loading;
 
     if(isLoading) { loading = <Loading></Loading>; } else {
+
       if(error) { content = <p>{error.message}</p>; } else {
+
+        if(processo) {
+          console.log(processo);
           content =
            <div className="wrapper Card">
            <div className="close" onClick={clickClose}>X</div>
@@ -28,9 +33,8 @@ import { ApiProcesso }  from '../config/constants'; //
             </div>
             <div className="row p-0">
               <Label title="Interessados" classTitle="Label-title-small" classValue="Label-text-small" className="column-24 ">
-              {
-                processo.interessados.map((interessado,index) => <div key={index} className="column-12 p-0">{interessado}</div>)
-              }
+              {processo.interessados}
+            
               </Label>
             </div>
             <div className="row p-0">
@@ -42,7 +46,9 @@ import { ApiProcesso }  from '../config/constants'; //
                 <button onClick={clickEdit} className="btn-primary m-r-5">Editar</button>
           </section>
           </div>
-          }
+
+        }
+      }
     }
 
      return (
