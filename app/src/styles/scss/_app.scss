@@ -21,7 +21,7 @@
     font-weight: 300 !important;
   }
   &--sm {
-    font-size: 12px !important;
+    font-size: 16px !important;
 
   }
 }
@@ -49,3 +49,98 @@
 .text-dark { color: $grey-dark; }
 .text-medium { color: $grey-medium; }
 .text-light { color: $grey-light; }
+
+
+.List {
+    list-style: none;
+    padding: 0;
+}
+
+.Label {
+  &-title { font-weight: bold; }
+  &-value {
+    display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 16px;
+
+   text-overflow: ellipsis;
+
+  }
+}
+.Label-title-small {
+  font-weight: bold;
+  font-size: 11px;
+}
+.Label-text {
+    font-family: $font-title, sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+}
+.Label-text-small {
+    font-family: $font-title, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+
+.List-item {
+  cursor: pointer;
+  display: table;
+  width: 100%;
+  padding: 9px;
+  color: $grey-medium;
+  font-size: 12px;
+  margin-bottom: 13px;
+  @include border();
+  font-weight: lighter;
+  @include shadow($shadow);
+  &--selected {
+    @include border_selected();
+    padding: 8px;
+    color: $primary;
+  }
+  &:hover {
+      // @include shadow($shadow-primary);
+    @include opacity(0.85);
+  }
+}
+
+.hide-handhelds {
+    @include respond-to(handhelds) { display:none; }
+}
+
+.Thumb {
+  background-color: $grey-light;
+  @include respond-to(handhelds) {display:none; }
+  @include respond-to(medium-screens) { width: 50px; max-width:50px}
+  @include respond-to(wide-screens) {  height: 60px; max-width:60px; }
+  &-xl {
+    height: 100px; width:100%; max-width: 100px;
+    @include respond-to(handhelds) { display:none; }
+  }
+}
+
+.Card {
+  position:relative;
+  @include border();
+  @include shadow($shadow);
+  margin: 0;
+  height: 100%;
+  color:$grey-medium;
+  min-height: 400px;
+  padding-bottom: 60px;
+  .Content {
+    text-align:left;
+    padding: 15px;
+  }
+  .Footer {
+    position: absolute;
+    text-align: right;
+    bottom: 0;
+    padding: 10px;
+    width: 100%;
+    height: 60px;
+  }
+}

@@ -2,22 +2,17 @@ import React, { Component } from 'react';
 import queryString from 'query-string';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Loading from './components/Loading';
+import Label from './components/Label';
 import { ApiProcesso }  from '../config/constants'; //
 
-class Detail extends  React.Component {
+class Detail extends React.Component {
 
   constructor(props) {
      super(props);
-     this.state = {
-         keyword: '',
-         processos: [],
-         isLoading: false,
-         selected: {},
-         selectedId: null,
-         error: null,
-         listInDetailMode: false,
-     };
-   }
+   this.setState({ keyword: 'Gabriel' });
+
+  }
+
 
    getProcesso = () => {
      this.setState({ isLoading: true });
@@ -47,24 +42,52 @@ class Detail extends  React.Component {
   }
 
   render() {
-    const {  selected, isLoading, error } = this.props;
-    let content;
+    const { selected, isLoading, error, clickClose } = this.props;
+    let  content;
+    let  loading;
 
-    if(isLoading) { content = <Loading></Loading>; } else {
+
+    if(isLoading) { loading = <Loading></Loading>; } else {
       if(error) { content = <p>{error.message}</p>; } else {
-          content = <div>{selected.assunto} {selected.descricao} {selected.entrada} {selected.numero}<p>Processo detalhe</p></div>;
+          content =
+           <div className="wrapper Card">
+           <div className="close" onClick={this.closeDetail}>X</div>
+          <section  className="Content">
+            <div className="row">
+                <div className="column-4 p-0 hide-handhelds">
+                    <div className="Thumb Thumb-xl">{selected.thumb}</div>
+                </div>
+              <div className="column-20 p-t-0 p-b-0">
+                <Label title="Processo" classTitle="Label-title-small" classValue="Label-text" className="column-12 p-0">{selected.numero}</Label>
+                <Label title="Data" classTitle="Label-title-small" classValue="Label-text" className="column-12 p-0">{selected.entrada}</Label>
+                <Label title="Assunto"  classTitle="Label-title-small" classValue="Label-text" className="column-24 p-0 p-t-10">{selected.assunto}</Label>
+              </div>
+            </div>
+            <div className="row p-0">
+              <Label title="Interessados" classTitle="Label-title-small" classValue="Label-text-small" className="column-24 ">
+              {
+                selected.interessados.map((interessado,index) => <div key={index} className="column-12 p-0">{interessado}</div>)
+              }
+              </Label>
+            </div>
+            <div className="row p-0">
+              <Label title="Descrição" classTitle="Label-title-small"  classValue="Label-text-small" className="column-24 ">{selected.descricao}</Label>
+            </div>
+          </section>
+          <section className="Footer">
+                <button className="btn-default m-r-15">Remover</button>
+                <button className="btn-primary m-r-5">Editar</button>
+          </section>
+          </div>
           }
     }
 
-
      return (
        <CssBaseline>
-       <div className="wrapper">
-       <div className="row">
          {content}
-       </div>
-       </div>
+         {loading}
        </CssBaseline>
+
       );
 
   }

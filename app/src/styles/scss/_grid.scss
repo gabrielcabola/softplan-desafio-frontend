@@ -82,7 +82,7 @@ img {
     }
 
 .wrapper, .row {
-    @extend %clearfix;
+    @extend %clearfix;  ;
     }
 
 [class*='column-'] {
@@ -92,7 +92,7 @@ img {
     min-height: 1px;
     }
 
-  
+
 
 @media #{$breakpoint-medium} {
     .wrapper {

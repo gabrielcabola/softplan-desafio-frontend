@@ -13,14 +13,17 @@ const ListItem = ({  processo, selected, compact, className='List-item', onClick
       <li className={className} onClick={onClick}>
         <Label title="Número" className="column-12 p-0" compact="true">{processo.numero}</Label>
         <Label title="Assunto" className="column-12 p-0" compact="true">{processo.assunto}</Label>
-        <Label title="Interessado" className="column-24 p-0" compact="true">{processo.interessados}</Label>
+        <Label title="Interessado" className="column-24 p-0 p-t-5" compact="true">{processo.interessados}</Label>
       </li>
     );
   } else {
+    className='List-item p-0';
     return (
       <li className={className} onClick={onClick}>
-        <div className="Thumb column-2">{processo.thumb}</div>
-        <Label title="Número" className="column-5 p-l-20">{processo.numero}</Label>
+        <div className="column-2 ">
+          <div className="Thumb hide-handhelds">{processo.thumb}</div>
+        </div>
+        <Label title="Número" className="column-5 p-l-20 ">{processo.numero}</Label>
         <Label title="Interessado"  className="column-5 ">{processo.interessados}</Label>
         <Label title="Descrição"  className="column-6 ">{processo.descricao}</Label>
         <Label title="Assunto"  className="column-6 ">{processo.assunto}</Label>

@@ -49,7 +49,7 @@ class App extends Component {
                   </form>
                   </div>
                   <div className="p-t-45">
-                      <span className="Info-text text-medium text-light ">Você pode criar um novo processo <a className="text-primary">clicando aqui</a></span>
+                      <span className="Info-text text-medium text-light ">Você pode criar um novo processo <a className="text-primary"><strong>clicando aqui</strong></a></span>
                   </div>
                 </center>
             </div>

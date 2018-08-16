@@ -5,9 +5,9 @@ import List from './components/List';
 import ListItem from './components/ListItem';
 import SearchBar from './components/SearchBar';
 import Loading from './components/Loading';
-import Detail from './Detail';
+import Processo from './Processo';
 
-import { ApiSearch }  from '../config/constants'; //
+import { ApiSearch, ApiProcesso }  from '../config/constants'; //
 
 class Search extends Component {
 
@@ -17,15 +17,19 @@ class Search extends Component {
         keyword: '',
         processos: [],
         isLoading: false,
+        isLoadingDetail: false,
         selected: {},
         selectedId: null,
         error: null,
+        errorDetail: null,
         listInDetailMode: false,
     };
     this.handleKeywordChange = this.handleKeywordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchList = this.fetchList.bind(this);
+    this.closeDetail = this.closeDetail.bind(this);
   }
+
 
   /**
    * Grava o status do novo valor no props
@@ -34,17 +38,43 @@ class Search extends Component {
     this.setState({keyword: event.target.value.toLowerCase()});
   }
 
+
   /**
    * Submit de uma nova busca
    */
   handleSubmit = (event) => {
     event.preventDefault();
     if (this.state.keyword !== '') {
-        //Reset Search states
-        this.setState({processos: [], listInDetailMode: false, isLoading: true });
+        //Reseta estado da busca
+        this.cleanSelection();
+        this.setState({processos: [], isLoading: true });
+        //Redireciona para URL de resultado
         this.props.history.push('/result?key='+this.state.keyword);
+        //Atualiza Lista
         this.fetchList();
     } //else print error on form
+  }
+
+  /**
+   * Grava o status do novo valor no props
+   */
+  closeDetail = ()  => {
+    //this.setState({listInDetailMode: false});
+    console.log('click colse');
+      this.cleanSelection();
+  }
+
+  /**
+   * Limpa Seleção
+   */
+  cleanSelection = () => {
+    this.state.processos.map(function(item) {
+      item.selected = false;
+    });
+    this.setState({
+      listInDetailMode: false,
+      selected:[]
+     });
   }
 
 
@@ -52,18 +82,32 @@ class Search extends Component {
    * Click do Item
    */
   clickSelectProcess = (processo,index) => {
-     this.state.processos.map(function(item) {
-       item.selected = false;
-     });
+
+    this.cleanSelection();
+
 
     let newProcessos = Object.assign({}, this.state);
     newProcessos.processos[index].selected = true;
+
+    //fetch API
+    fetch(ApiProcesso + processo.id)
+    .then(response => {
+      if (response.ok) {
+        this.setState({ isLoadingDetail: false });
+        return response.json();
+      } else {
+        throw new Error('Houve um problema ao solicitar sua requisição ...');
+      }
+    })
+    .then(data => this.setState({ selected: data, isLoadingDetail: false }))
+    .catch(error => this.setState({ errorDetail: error, isLoadingDetail: false }));
+
     this.setState({
       processos:newProcessos.processos,
-      listInDetailMode: true,
-      selected:processo
+      listInDetailMode: true
      });
-     this.props.history.push('/processo/'+processo.id);
+
+     //this.props.history.push('/processo/'+processo.id);
   }
 
 
@@ -105,6 +149,7 @@ class Search extends Component {
   componentDidMount() {
 
      this.setState({ isLoading: true });
+
      //Resgata dados da query string
      const values = queryString.parse(this.props.location.search);
      let path = this.props.location.pathname;
@@ -121,24 +166,31 @@ class Search extends Component {
           this.props.history.push('/');
        }
      }
-
-
   }
 
 
 
 
-
   render() {
-    const { keyword, selected, processos, isLoading, listInDetailMode, error } = this.state;
+    const { keyword, selected, processos, isLoading, errorDetail, isLoadingDetail, listInDetailMode, error } = this.state;
     let content;
+    let detalhe;
 
-
+    if(selected) {
+    //  detalhe = <Detail {...this.state}></Detail>
+        detalhe = <Processo processo={selected}  error={errorDetail} IsLoading={isLoadingDetail}></Processo>;
+    }
+    //Loading Render
     if(isLoading) { content = <Loading></Loading>; } else {
-      if(error) { content = <p>{error.message}</p>; } else {
-          if(processos.length === 0)  { content = <h3 className="Sub-title text-primary"><center>Nenhum registro encontrado</center></h3>; } else {
 
-            content = <List name="Busca" listInDetailMode={listInDetailMode}>
+      //Error Render
+      if(error) { content = <p>{error.message}</p>; } else {
+
+          //Sem Registros Render
+          if(processos.length === 0)  { content = <h3 className="Sub-title text-primary p-50"><center>Nenhum registro encontrado</center></h3>; } else {
+
+            //Lista Render
+            content = <List name="Busca" keyword={keyword} listInDetailMode={listInDetailMode}>
                        {
                        processos.map((processo,index) =>
                        <ListItem
@@ -148,7 +200,7 @@ class Search extends Component {
                           onClick={this.clickSelectProcess.bind(this,processo,index)}
                        ></ListItem>
                      )}
-                     <Detail {...this.state} />
+                     {detalhe}
                     </List>;
           }
       }
@@ -165,7 +217,9 @@ class Search extends Component {
                onSubmit={this.handleSubmit}
                onChange={this.handleKeywordChange}
            ></SearchBar>
+           <div className="row">
           {content}
+            </div>
         </div>
         </div>
         </CssBaseline>

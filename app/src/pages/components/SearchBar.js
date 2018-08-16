@@ -4,7 +4,6 @@ import React from 'react';
 function SearchBar({ title, keyword, onChange, onSubmit, placeholder="Pesquise por uma informação do processo" }) {
   return (
     <div className="row">
-
     <div className="column-3">
         <p className="Title Title--light Title--sm">{title}</p>
     </div>
@@ -18,8 +17,8 @@ function SearchBar({ title, keyword, onChange, onSubmit, placeholder="Pesquise p
             placeholder={placeholder}/>
       </form>
     </div>
-    <div className="column-12">
-      <button>Novo</button>
+    <div className="column-12 p-l-0 p-r-0">
+      <button className="btn-default">Novo</button>
     </div>
     </div>
   );
