@@ -6,10 +6,8 @@ import './styles/css/index.css';
 
 import App from './pages/App';
 import Search from './pages/Search';
+import Detail from './pages/Detail';
 import Error404 from './pages/Error404';
-
-
-
 import registerServiceWorker from './registerServiceWorker';
 
 
@@ -18,6 +16,7 @@ ReactDOM.render(
         <Switch>
             <Route path="/" exact={true} component={App} />
             <Route path="/result/" component={Search} />
+            <Route path="/processo/" component={Search} />
             <Route path='*' component={Error404} />
         </Switch>
     </ BrowserRouter>

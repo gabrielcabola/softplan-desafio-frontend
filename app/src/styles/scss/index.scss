@@ -53,7 +53,7 @@
   @include shadow($shadow);
   &--selected {
     border: 2px solid $primary;
-    padding: 10px;
+    padding: 8px;
     color: $primary;
   }
   &:hover {

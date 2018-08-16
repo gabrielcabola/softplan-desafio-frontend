@@ -832,7 +832,7 @@ input {
 }
 .List-item--selected {
   border: 2px solid #005b95;
-  padding: 10px;
+  padding: 8px;
   color: #005b95;
 }
 .List-item:hover {

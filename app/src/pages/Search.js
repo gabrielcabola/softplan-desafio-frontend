@@ -5,8 +5,9 @@ import List from './components/List';
 import ListItem from './components/ListItem';
 import SearchBar from './components/SearchBar';
 import Loading from './components/Loading';
+import Detail from './Detail';
 
-import { ApiSearch }  from '../config/constants'; //ApiProcesso
+import { ApiSearch }  from '../config/constants'; //
 
 class Search extends Component {
 
@@ -17,12 +18,12 @@ class Search extends Component {
         processos: [],
         isLoading: false,
         selected: {},
+        selectedId: null,
         error: null,
         listInDetailMode: false,
     };
     this.handleKeywordChange = this.handleKeywordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.clickSelectProcess = this.clickSelectProcess.bind(this);
     this.fetchList = this.fetchList.bind(this);
   }
 
@@ -50,9 +51,19 @@ class Search extends Component {
   /**
    * Click do Item
    */
-  clickSelectProcess = (event) => {
-    console.log(event);
-    this.setState({ listInDetailMode: true, selected:event });
+  clickSelectProcess = (processo,index) => {
+     this.state.processos.map(function(item) {
+       item.selected = false;
+     });
+
+    let newProcessos = Object.assign({}, this.state);
+    newProcessos.processos[index].selected = true;
+    this.setState({
+      processos:newProcessos.processos,
+      listInDetailMode: true,
+      selected:processo
+     });
+     this.props.history.push('/processo/'+processo.id);
   }
 
 
@@ -90,18 +101,28 @@ class Search extends Component {
 }
 
 
+
   componentDidMount() {
+
      this.setState({ isLoading: true });
      //Resgata dados da query string
      const values = queryString.parse(this.props.location.search);
-     console.log(values.key);
-     if(values.key) {
-        //caso tenha executa busca via URL
-        this.fetchList(values.key);
-     } else {
-       //caso vazia envia para home
-        this.props.history.push('/');
+     let path = this.props.location.pathname;
+     let paths =  path.split("/");
+     if(paths[1]=='processo') {
+         this.setState({selectedId: paths[2]});
      }
+     if(paths[1]=='result') {
+       if(values.key) {
+          //caso tenha executa busca via URL
+          this.fetchList(values.key);
+       } else {
+         //caso vazia envia para home
+          this.props.history.push('/');
+       }
+     }
+
+
   }
 
 
@@ -119,9 +140,16 @@ class Search extends Component {
 
             content = <List name="Busca" listInDetailMode={listInDetailMode}>
                        {
-                       processos.map((processo,index) => <ListItem  key={processo.id}  processo={processo} compact={listInDetailMode} onClick={this.clickSelectProcess}></ListItem>)
-                       }
-                     </List>;
+                       processos.map((processo,index) =>
+                       <ListItem
+                          key={processo.id}
+                          processo={processo}
+                          compact={listInDetailMode}
+                          onClick={this.clickSelectProcess.bind(this,processo,index)}
+                       ></ListItem>
+                     )}
+                     <Detail {...this.state} />
+                    </List>;
           }
       }
     }

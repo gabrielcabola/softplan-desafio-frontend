@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 function List({ name, listInDetailMode, children, type = 'button' }) {
 
 
@@ -12,8 +11,11 @@ function List({ name, listInDetailMode, children, type = 'button' }) {
           <div className="column-3"></div>
           <div className="column-9">
               <ul className='List'>
-              {children}
+              {children[0]}
               </ul>
+          </div>
+          <div className="column-12">
+            {children[1]}
           </div>
       </div>
     );
@@ -25,7 +27,7 @@ function List({ name, listInDetailMode, children, type = 'button' }) {
           <div className="column-3"></div>
           <div className="column-18">
               <ul className='List'>
-              {children}
+                {children[0]}
               </ul>
           </div>
       </div>

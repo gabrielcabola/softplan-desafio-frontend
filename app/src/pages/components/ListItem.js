@@ -1,12 +1,16 @@
 import React from 'react';
 import Label from './Label';
 
-function ListItem({ key, processo, selected, compact, className, onClick }) {
-  console.log(processo);
+
+const ListItem = ({  processo, selected, compact, className='List-item', onClick }) => {
+
+  if(processo.selected) {
+    className = 'List-item List-item--selected';
+  }
 
   if(compact) {
     return (
-      <li className='List-item' onClick={onClick}>
+      <li className={className} onClick={onClick}>
         <Label title="Número" className="column-12 p-0" compact="true">{processo.numero}</Label>
         <Label title="Assunto" className="column-12 p-0" compact="true">{processo.assunto}</Label>
         <Label title="Interessado" className="column-24 p-0" compact="true">{processo.interessados}</Label>
@@ -14,7 +18,7 @@ function ListItem({ key, processo, selected, compact, className, onClick }) {
     );
   } else {
     return (
-      <li className='List-item' onClick={onClick}>
+      <li className={className} onClick={onClick}>
         <div className="Thumb column-2">{processo.thumb}</div>
         <Label title="Número" className="column-5 p-l-20">{processo.numero}</Label>
         <Label title="Interessado"  className="column-5 ">{processo.interessados}</Label>
