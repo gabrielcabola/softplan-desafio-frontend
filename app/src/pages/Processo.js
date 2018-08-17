@@ -1,10 +1,11 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Hidden from '@material-ui/core/Hidden';
 import Loading from './components/Loading';
 import Label from './components/Label';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
- function Processo({processo,interessados,index,clickClose,clickEdit,clickRemove,isLoading="true",error}) {
+ function Processo({ processo, interessados, index, clickClose, clickEdit, clickRemove, isLoading="true", error}) {
 
     let  content;
     let  loading;
@@ -21,9 +22,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
               </div>
               <section  className="Content">
                 <div className="row">
-                    <div className="column-4 p-0 hide-handhelds">
-                        <div className="Thumb Thumb-xl">{processo.thumb}</div>
-                    </div>
+                    <Hidden only={['xs','sm']}>
+                      <div className="column-4 p-0">
+                          <div className="Thumb Thumb-xl">{processo.thumb}</div>
+                      </div>
+                    </Hidden>
                   <div className="column-20 p-t-0 p-b-0">
                     <Label title="Processo" classTitle="Label-title-small" classValue="Label-text" className="column-12 p-0">{processo.numero}</Label>
                     <Label title="Data" classTitle="Label-title-small" classValue="Label-text" className="column-12 p-0">{processo.entrada}</Label>
@@ -54,8 +57,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
          {content}
          {loading}
        </CssBaseline>
-
       );
+
+
 
 
 }

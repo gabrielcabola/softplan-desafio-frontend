@@ -22,6 +22,7 @@ const ListItem = ({  processo, selected, compact, className='List-item', onClick
     className='List-item p-0';
     return (
       <li className={className} onClick={onClick}>
+
         <div className="column-2 ">
           <div className="Thumb hide-handhelds">{processo.thumb}</div>
         </div>

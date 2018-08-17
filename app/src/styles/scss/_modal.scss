@@ -45,12 +45,13 @@
       display: inline-block;
       vertical-align: middle;
       box-sizing: border-box;
-      max-width: auto;
+
       cursor: default;
       background: #FFF;
       @include border();
-      @include shadow($shadow-modal);      
-      width: 650px;
+      @include shadow($shadow-modal);
+      width: 100%;
+      max-width: 620px; 
       min-height: 330px;
       padding: 15px;
       padding-bottom: 50px;

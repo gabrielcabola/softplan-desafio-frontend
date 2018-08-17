@@ -105,7 +105,7 @@ class Search extends Component {
       })
         .then(response => {
           if (response.ok) {
-            this.setState({ isLoadingDetail: false });      
+            this.setState({ isLoadingDetail: false });
             this.handlecloseDetail();
             this.fetchList();
           } else {
@@ -247,7 +247,7 @@ class Search extends Component {
      return (
         <CssBaseline>
         <div className="wrapper">
-        <div className="row">
+        <div className="row p-t-20">
           <SearchBar
                title="Busca de Processos"
                keyword={keyword}
@@ -255,7 +255,7 @@ class Search extends Component {
                onSubmit={this.handleSubmit}
                onChange={this.handleKeywordChange}
            ></SearchBar>
-           <div className="row">
+           <div className="row p-t-15">
               {content}
             </div>
         </div>

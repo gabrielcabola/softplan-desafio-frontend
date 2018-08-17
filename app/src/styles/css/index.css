@@ -14,6 +14,7 @@ body {
   font-size: 16px;
   font-weight: normal;
   height: 100%;
+  padding: 10px;
 }
 
 #root {
@@ -1021,14 +1022,14 @@ input {
   display: inline-block;
   vertical-align: middle;
   box-sizing: border-box;
-  max-width: auto;
   cursor: default;
   background: #FFF;
   border: 1px solid #c9c9c9;
   -moz-box-shadow: 0px 5px 8px rgba(100, 100, 100, 0.4);
   -webkit-box-shadow: 0px 5px 8px rgba(100, 100, 100, 0.4);
   box-shadow: 0px 5px 8px rgba(100, 100, 100, 0.4);
-  width: 650px;
+  width: 100%;
+  max-width: 620px;
   min-height: 330px;
   padding: 15px;
   padding-bottom: 50px;
@@ -1060,6 +1061,9 @@ input {
   padding: 1px;
   padding: 11px 31px;
 }
+.btn-default:disabled {
+  opacity: 0.5;
+}
 
 .btn-default-inverse {
   border: 1px solid #c9c9c9;
@@ -1073,17 +1077,21 @@ input {
   font-weight: 600;
   cursor: pointer;
   font-family: "Montserrat";
-  background-color: #9e9e9e;
+  background-color: rgba(0, 0, 0, 0.4);
   color: #FFF;
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: light !important;
   border: none;
 }
 .btn-default-inverse:hover {
   -moz-box-shadow: 0px 2px 3px rgba(201, 201, 201, 0.9);
   -webkit-box-shadow: 0px 2px 3px rgba(201, 201, 201, 0.9);
   box-shadow: 0px 2px 3px rgba(201, 201, 201, 0.9);
-  background-color: #FFF;
+  background-color: rgba(0, 0, 0, 0.2);
   color: #0f0f0f;
+}
+.btn-default-inverse:disabled {
+  opacity: 0.5;
 }
 
 .btn-primary {
@@ -1104,6 +1112,9 @@ input {
   color: #FFF;
   background-color: #005b95;
   border: 1px solid #005b95;
+}
+.btn-primary:disabled {
+  opacity: 0.5;
 }
 
 .btn-primary-inverse {
@@ -1126,6 +1137,9 @@ input {
   background-color: #007ac8;
   border: 1px solid #005b95;
 }
+.btn-primary-inverse:disabled {
+  opacity: 0.5;
+}
 
 .btn-small {
   padding: 7px 20px;
@@ -1133,6 +1147,9 @@ input {
 }
 .btn-small:hover {
   padding: 7px 20px;
+}
+.btn-small:disabled {
+  opacity: 0.5;
 }
 
 .close {
@@ -1143,6 +1160,17 @@ input {
   right: 15px;
 }
 .close:hover {
+  color: #005b95;
+}
+.close:disabled {
+  opacity: 0.5;
+}
+
+.Side-icon {
+  color: #757575;
+  cursor: pointer;
+}
+.Side-icon:hover {
   color: #005b95;
 }
 
