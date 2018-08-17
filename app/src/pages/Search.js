@@ -31,6 +31,7 @@ class Search extends Component {
     this.handleKeywordChange = this.handleKeywordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchList = this.fetchList.bind(this);
+    this.handleToggleModal = this.handleToggleModal.bind(this);
   }
 
 
@@ -178,7 +179,7 @@ class Search extends Component {
 
 
   render() {
-    const { keyword, selected, processos, isLoading, errorDetail, isLoadingDetail, listInDetailMode, error } = this.state;
+    const { keyword, selected, processos, isLoading, errorDetail, isLoadingDetail, listInDetailMode, error, showAddModal } = this.state;
     let content;
     let detalhe;
 
@@ -224,6 +225,7 @@ class Search extends Component {
           <SearchBar
                title="Busca de Processos"
                keyword={keyword}
+               onNew={this.handleToggleModal}
                onSubmit={this.handleSubmit}
                onChange={this.handleKeywordChange}
            ></SearchBar>
@@ -234,6 +236,10 @@ class Search extends Component {
             </div>
         </div>
         </div>
+        {showAddModal &&
+        <Modal title="Cadastro de processo" show={showAddModal} onClose={() => this.handleToggleModal()}>
+          <FormAdd showAddModal={showAddModal}> </FormAdd>
+        </Modal>}
         </CssBaseline>
       );
 

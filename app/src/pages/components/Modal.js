@@ -34,25 +34,6 @@ class Modal extends React.Component {
   }
 
 
-
-   // getProcesso = () => {
-   //   this.setState({ isLoading: true });
-   //   let id = (this.props.selected.id  || this.props.selectedId);
-   //   console.log('------------->' + id);
-   //   fetch(ApiProcesso + id,)
-   //   .then(response => {
-   //     if (response.ok) {
-   //       this.setState({ isLoading: false });
-   //       return response.json();
-   //     } else {
-   //       throw new Error('Houve um problema ao solicitar sua requisição ...');
-   //     }
-   //   })
-   //   .then(data => this.setState({ selected: data, isLoading: false }))
-   //   .catch(error => this.setState({ error, isLoading: false }));
-   // }
-
-
   render() {
     const { children, title, onClose, show } = this.props;
 
@@ -73,9 +54,7 @@ class Modal extends React.Component {
         </div>
         </div>
       </Fade>
-
       );
-
   }
 }
 

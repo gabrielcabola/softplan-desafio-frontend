@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-function SearchBar({ title, keyword, onChange, onSubmit, placeholder="Pesquise por uma informação do processo" }) {
+function SearchBar({ title, keyword, onChange, onSubmit, onNew, placeholder="Pesquise por uma informação do processo" }) {
   return (
     <div className="row">
     <div className="column-3">
@@ -23,8 +23,9 @@ function SearchBar({ title, keyword, onChange, onSubmit, placeholder="Pesquise p
       </form>
     </div>
     <div className="column-12 p-l-0 p-r-0">
-      <button className="btn-default">Novo</button>
+      <button className="btn-default" onClick={onNew}>Novo</button>
     </div>
+
     </div>
   );
 }
