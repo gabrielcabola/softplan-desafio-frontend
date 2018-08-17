@@ -4,9 +4,9 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom' // importando o 
 
 import './styles/css/index.css';
 
+
 import App from './pages/App';
 import Search from './pages/Search';
-import Detail from './pages/Detail';
 import Error404 from './pages/Error404';
 import registerServiceWorker from './registerServiceWorker';
 

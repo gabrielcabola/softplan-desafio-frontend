@@ -24,7 +24,20 @@
     border: none;
     padding: 1px;
     padding: 11px 31px;
+  }
+}
 
+.btn-default-inverse {
+  @include button();
+  background-color:rgba(0, 0, 0, .4);
+  color: #FFF;
+  font-size: 12px;
+  font-weight: light !important;
+  border: none;
+  &:hover {
+    @include shadow($shadow-near);
+    background-color:rgba(0, 0, 0, .2);
+    color: darken($grey-medium,40%);
   }
 }
 
@@ -37,7 +50,24 @@
     @include border-custom($primary);
   }
 }
+.btn-primary-inverse {
+  @include button();
+  color: #FFF;
+  background-color: $primary;
+  &:hover {
+    color: #FFF;
+    background-color: lighten($primary,10%);
+    @include border-custom($primary);
+  }
+}
 
+.btn-small {
+  padding: 7px 20px;
+  height: 28px;
+  &:hover {
+    padding: 7px 20px;
+  }
+}
 .close {
   font-size: 15px;
   cursor: pointer;

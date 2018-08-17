@@ -1,0 +1,59 @@
+
+
+.FormAdd {
+    padding: 0px;
+    text-align: left;
+}
+
+
+  .modal-overlay-div {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 1000;
+      background-color: rgba(0, 0, 0, .4);
+  }
+
+  .modal-content-div {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 10000;
+      overflow: auto;
+      text-align: center;
+      padding: 4px;
+      cursor: pointer;
+  }
+
+  .modal-content-div:after {
+      vertical-align: middle;
+      display: inline-block;
+      height: 100%;
+      margin-left: -.05em;
+      content: '';
+  }
+
+  .modal-dialog-div {
+      position: relative;
+      outline: 0;
+      display: inline-block;
+      vertical-align: middle;
+      box-sizing: border-box;
+      max-width: auto;
+      cursor: default;
+      background: #FFF;
+      @include border();
+      @include shadow($shadow-modal);
+      min-width:320px;
+      width: 650px;
+      min-height: 330px;
+      padding: 15px;
+      padding-bottom: 50px;
+      text-align: left;
+  }

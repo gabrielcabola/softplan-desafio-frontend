@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import queryString from 'query-string'
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Fade from '@material-ui/core/Fade';
 import List from './components/List';
 import ListItem from './components/ListItem';
 import SearchBar from './components/SearchBar';
 import Loading from './components/Loading';
 import Processo from './Processo';
+import Modal from './components/Modal';
+import FormAdd from './forms/FormAdd';
 
 import { ApiSearch, ApiProcesso }  from '../config/constants'; //
 
@@ -23,11 +26,11 @@ class Search extends Component {
         error: null,
         errorDetail: null,
         listInDetailMode: false,
+        showAddModal: false,
     };
     this.handleKeywordChange = this.handleKeywordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchList = this.fetchList.bind(this);
-  //  this.handlecloseDetail = this.handlecloseDetail.bind(this);
   }
 
 
@@ -38,6 +41,10 @@ class Search extends Component {
     this.setState({keyword: event.target.value.toLowerCase()});
   }
 
+  //Abrir Add Modal
+  handleToggleModal() {
+    this.setState({ showAddModal: !this.state.showAddModal });
+  }
 
   /**
    * Submit de uma nova busca
@@ -56,20 +63,20 @@ class Search extends Component {
   }
 
   /**
-   * Grava o status do novo valor no props
+   * Fecha Detalhe do processo
    */
   handlecloseDetail = ()  => {
-    //this.setState({listInDetailMode: false});
-    console.log('click colse');
-      this.cleanSelection();
+    this.cleanSelection();
   }
+
+
 
   /**
    * Limpa Seleção
    */
   cleanSelection = () => {
     this.state.processos.map(function(item) {
-      item.selected = false;
+      return item.selected = false;
     });
     this.setState({
       listInDetailMode: false,
@@ -153,10 +160,10 @@ class Search extends Component {
      const values = queryString.parse(this.props.location.search);
      let path = this.props.location.pathname;
      let paths =  path.split("/");
-     if(paths[1]=='processo') {
+     if(paths[1]==='processo') {
          this.setState({selectedId: paths[2]});
      }
-     if(paths[1]=='result') {
+     if(paths[1]==='result') {
        if(values.key) {
           //caso tenha executa busca via URL
           this.fetchList(values.key);
@@ -201,7 +208,9 @@ class Search extends Component {
                           onClick={this.clickSelectProcess.bind(this,processo,index)}
                        ></ListItem>
                      )}
-                     {detalhe}
+                     <Fade in={selected}>
+                        {detalhe}
+                     </Fade>
                     </List>;
           }
       }
@@ -219,7 +228,9 @@ class Search extends Component {
                onChange={this.handleKeywordChange}
            ></SearchBar>
            <div className="row">
-          {content}
+
+              {content}
+
             </div>
         </div>
         </div>

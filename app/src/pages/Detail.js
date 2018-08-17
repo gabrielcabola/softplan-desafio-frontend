@@ -9,8 +9,6 @@ class Detail extends React.Component {
 
   constructor(props) {
      super(props);
-   this.setState({ keyword: 'Gabriel' });
-
   }
 
 
@@ -31,15 +29,15 @@ class Detail extends React.Component {
      .catch(error => this.setState({ error, isLoading: false }));
    }
 
-  componentWillReceiveProps() {
-    console.log('----------componentWillReceiveProps--->' );
-    this.getProcesso();
-  }
-
-  componentDidMount() {
-    console.log('-------componentDidMount------>');
-    this.getProcesso();
-  }
+  // componentWillReceiveProps() {
+  //   console.log('----------componentWillReceiveProps--->' );
+  //   this.getProcesso();
+  // }
+  //
+  // componentDidMount() {
+  //   console.log('-------componentDidMount------>');
+  //   this.getProcesso();
+  // }
 
   render() {
     const { selected, isLoading, error, clickClose } = this.props;
