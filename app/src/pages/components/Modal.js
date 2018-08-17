@@ -8,7 +8,9 @@ class Modal extends React.Component {
   constructor(props) {
      super(props);
      this.handleKeyUp = this.handleKeyUp.bind(this);
+
   }
+
 
   // Adiciondo listeners após componentes estar montado.
   componentDidMount() {

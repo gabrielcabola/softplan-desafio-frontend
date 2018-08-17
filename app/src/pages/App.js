@@ -5,9 +5,9 @@ import FormAdd from './forms/FormAdd';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes, faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faTimesCircle, faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faTimes,faSearch,faSpinner)
+library.add(faTimes,faSearch,faSpinner, faTimesCircle)
 
 class App extends Component {
 
@@ -20,6 +20,7 @@ class App extends Component {
     };
     this.handleKeywordChange = this.handleKeywordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleToggleModal = this.handleToggleModal.bind(this);
   }
 
   //Abrir Modal
@@ -39,6 +40,9 @@ class App extends Component {
     }
   }
 
+  handleFinishModal(event) {
+    this.setState({ showAddModal: false });
+  }
 
   render() {
     const {showAddModal} = this.state;
@@ -72,7 +76,7 @@ class App extends Component {
 
           {showAddModal &&
           <Modal title="Cadastro de processo" show={showAddModal} onClose={() => this.handleToggleModal()}>
-            <FormAdd showAddModal={showAddModal}> </FormAdd>
+            <FormAdd showAddModal={showAddModal} onFinish={() => this.handleFinishModal()}> </FormAdd>
           </Modal>}
 
       </CssBaseline>

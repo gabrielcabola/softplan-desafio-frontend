@@ -1,8 +1,4 @@
 
-@keyframes img-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
 
 .box-shadow {
   box-shadow: $shadow;
@@ -42,7 +38,8 @@
   font-size:14px;
 }
 
-
+.text-center { text-align: center; }
+.text-small { font-size: 13px; font-weight: lighter; }
 
 .text-light { font-weight: lighter !important; }
 .text-primary { color: $primary; }

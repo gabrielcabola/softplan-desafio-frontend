@@ -3,10 +3,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Loading from './components/Loading';
 import Label from './components/Label';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ApiProcesso }  from '../config/constants';
 
- function Processo({processo,clickClose,clickEdit,clickRemove,isLoading="true",error}) {
-
+ function Processo({processo,interessados,index,clickClose,clickEdit,clickRemove,isLoading="true",error}) {
 
     let  content;
     let  loading;
@@ -16,7 +14,6 @@ import { ApiProcesso }  from '../config/constants';
       if(error) { content = <p>{error.message}</p>; } else {
 
         if(processo) {
-          console.log(processo);
           content =
            <div className="wrapper Card">
               <div className="close" onClick={clickClose}>
@@ -35,8 +32,7 @@ import { ApiProcesso }  from '../config/constants';
                 </div>
                 <div className="row p-0">
                   <Label title="Interessados" classTitle="Label-title-small" classValue="Label-text-small" className="column-24 ">
-                  {processo.interessados}
-
+                {interessados}
                   </Label>
                 </div>
                 <div className="row p-0">
@@ -45,7 +41,7 @@ import { ApiProcesso }  from '../config/constants';
               </section>
               <section className="Footer">
                     <button onClick={clickRemove} className="btn-default m-r-15">Remover</button>
-                    <button onClick={clickEdit} className="btn-primary m-r-5">Editar</button>
+                    <button  className="btn-primary m-r-5">Editar</button>
               </section>
           </div>
 

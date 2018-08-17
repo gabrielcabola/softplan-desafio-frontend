@@ -49,8 +49,7 @@
       cursor: default;
       background: #FFF;
       @include border();
-      @include shadow($shadow-modal);
-      min-width:320px;
+      @include shadow($shadow-modal);      
       width: 650px;
       min-height: 330px;
       padding: 15px;

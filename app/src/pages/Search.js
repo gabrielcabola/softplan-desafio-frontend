@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import queryString from 'query-string'
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Fade from '@material-ui/core/Fade';
 import List from './components/List';
 import ListItem from './components/ListItem';
 import SearchBar from './components/SearchBar';
@@ -22,6 +21,7 @@ class Search extends Component {
         isLoading: false,
         isLoadingDetail: false,
         selected: {},
+        selectedIndex: null,
         selectedId: null,
         error: null,
         errorDetail: null,
@@ -46,7 +46,12 @@ class Search extends Component {
   handleToggleModal() {
     this.setState({ showAddModal: !this.state.showAddModal });
   }
-
+  //Fechar Modal
+  handleFinishModal(event) {
+    //Atualiza Lista
+    this.fetchList();
+    this.setState({ showAddModal: false });
+  }
   /**
    * Submit de uma nova busca
    */
@@ -70,8 +75,6 @@ class Search extends Component {
     this.cleanSelection();
   }
 
-
-
   /**
    * Limpa Seleção
    */
@@ -83,6 +86,32 @@ class Search extends Component {
       listInDetailMode: false,
       selected:[]
      });
+  }
+
+
+  /**
+   * Click do Item
+   */
+  clickRemoveProcess = () => {
+
+      this.setState({ isLoadingDetail: true });
+      //fetch API
+      fetch(ApiProcesso + this.state.selected.id,{
+        headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json'
+        },
+        method: 'DELETE'
+      })
+        .then(response => {
+          if (response.ok) {
+            this.setState({ isLoadingDetail: false });      
+            this.handlecloseDetail();
+            this.fetchList();
+          } else {
+            throw new Error('Houve um problema ao solicitar sua requisição ...');
+          }
+        });
   }
 
 
@@ -111,9 +140,9 @@ class Search extends Component {
 
     this.setState({
       processos:newProcessos.processos,
-      listInDetailMode: true
+      listInDetailMode: true,
+      selectedIndex: index,
      });
-
      //this.props.history.push('/processo/'+processo.id);
   }
 
@@ -179,10 +208,9 @@ class Search extends Component {
 
 
   render() {
-    const { keyword, selected, processos, isLoading, errorDetail, isLoadingDetail, listInDetailMode, error, showAddModal } = this.state;
+    const { keyword, selected, selectedIndex, processos, isLoading, errorDetail, isLoadingDetail, listInDetailMode, error, showAddModal } = this.state;
     let content;
     let detalhe;
-
 
     //Loading Render
     if(isLoading) { content = <Loading></Loading>; } else {
@@ -192,7 +220,7 @@ class Search extends Component {
 
         if(selected) {
         //  detalhe = <Detail {...this.state}></Detail>
-            detalhe = <Processo processo={selected} clickClose={this.handlecloseDetail.bind(this)} error={errorDetail} isLoading={isLoadingDetail}></Processo>;
+            detalhe = <Processo processo={selected} index={selectedIndex}  interessados={selected.interessados} clickClose={this.handlecloseDetail.bind(this)} clickRemove={this.clickRemoveProcess.bind(this)} error={errorDetail} isLoading={isLoadingDetail}></Processo>;
         }
 
           //Sem Registros Render
@@ -209,9 +237,7 @@ class Search extends Component {
                           onClick={this.clickSelectProcess.bind(this,processo,index)}
                        ></ListItem>
                      )}
-                     <Fade in={selected}>
-                        {detalhe}
-                     </Fade>
+                    {detalhe}
                     </List>;
           }
       }
@@ -230,15 +256,13 @@ class Search extends Component {
                onChange={this.handleKeywordChange}
            ></SearchBar>
            <div className="row">
-
               {content}
-
             </div>
         </div>
         </div>
         {showAddModal &&
         <Modal title="Cadastro de processo" show={showAddModal} onClose={() => this.handleToggleModal()}>
-          <FormAdd showAddModal={showAddModal}> </FormAdd>
+          <FormAdd showAddModal={showAddModal} onFinish={() => this.handleFinishModal()}> </FormAdd>
         </Modal>}
         </CssBaseline>
       );
